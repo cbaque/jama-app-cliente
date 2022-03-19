@@ -1,0 +1,18 @@
+<ion-header class="ion-no-border" [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-img src="assets/images/logo_letra.png" slot="start" class="ion-padding"></ion-img>
+    <ion-title class="ion-padding ion-text-center">
+      <ion-chip outline="true" *ngIf="USER">
+        <ion-label>{{ USER.cliente.nombres }}</ion-label>
+      </ion-chip>
+    </ion-title>
+
+    <ion-buttons slot="secondary">
+      <ion-button (click)="carrito()">
+        <ion-icon src="assets/images/logo.svg"></ion-icon>
+        <ion-badge color="danger">{{ C_NEW_ORDER }}</ion-badge>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>

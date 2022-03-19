@@ -1,0 +1,48 @@
+<app-header></app-header>
+<ion-toolbar>
+    <ion-searchbar mode="ios" placeholder="Buscar Menu" debounce="500" (ionChange)="getProductos($event)"></ion-searchbar>
+</ion-toolbar>
+<ion-content [fullscreen]="true" scrollY="true">
+    <ion-refresher class="ion-no-padding" slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ng-container *ngIf="LOADING_PRODUCTOS; else data">
+        <ion-card class="ion-no-padding" *ngFor="let item of [1,2,3]">
+            <ion-skeleton-text animated style="width: 100%; height: 300px;"></ion-skeleton-text>
+        </ion-card>
+    </ng-container>
+
+    <ng-template #data>
+
+        <ng-container *ngIf="!PRODUCTOS.length; else sihayProductosNormales">
+            <ion-slides pager="false" class="ion-padding">
+                <ion-slide>
+                  <div class="slide">
+                    <img src="assets/images/logo.svg" class="img-no-found">
+                    <h6>No hay productos</h6> 
+                  </div>
+          
+                </ion-slide>
+              </ion-slides>
+        </ng-container>
+
+        <ng-template #sihayProductosNormales>
+            <ion-card *ngFor="let item of PRODUCTOS" class="ion-no-padding" (click)="pedido( item )">
+                <div class="ion-text-start">
+                    <img [src]="'data:image/jpg;base64,' + item.imagen.imagen_prod" fallimg="default">
+                </div>
+                <ion-card-header class="ion-text-start">
+                    <ion-card-subtitle>
+                        <ion-icon name="fast-food" size="medium"></ion-icon> {{ item.titulo_prod }}
+                    </ion-card-subtitle>
+                    <ion-card-subtitle>
+                        <ion-icon name="restaurant" size="medium"></ion-icon> {{ item.aliado.razon_social }}
+                    </ion-card-subtitle>
+                </ion-card-header>
+            </ion-card>
+        </ng-template>
+
+    </ng-template>
+
+</ion-content>

@@ -1,0 +1,96 @@
+<app-header></app-header>
+<ion-toolbar class="ion-text-center ion-padding" *ngIf="!USER">
+  <ion-title class="ion-text-wrap spacing">Iniciar Sesi&oacute;n</ion-title>
+</ion-toolbar>
+
+<ion-content fullscreen="true" class="ion-padding">
+
+  <ion-grid fixed class="ion-padding" *ngIf="!USER; else templateUsuario">
+    <form [formGroup]="authForm" (ngSubmit)="login()">
+      <ion-row>
+        <ion-col>
+
+          <ion-list>
+
+            <ion-item lines="full">
+              <ion-label position="floating">C&eacute;dula</ion-label>
+              <ion-input name="email" formControlName="email" type="tel" required></ion-input>
+              <ion-icon name="person" slot="start"></ion-icon>
+              <ng-container *ngFor="let validation of validator.validationMessages.email">
+                <ion-text color="danger"
+                  *ngIf="authForm.get('email').hasError(validation.type) && (authForm.get('email').dirty || authForm.get('email').touched)">
+                  {{ validation.message }}
+                </ion-text>
+              </ng-container>
+            </ion-item>
+
+            <ion-item lines="full">
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input name="password" formControlName="password" type="password" required></ion-input>
+              <ion-icon name="bag" slot="start"></ion-icon>
+              <ng-container *ngFor="let validation of validator.validationMessages.password">
+                <ion-text color="danger"
+                  *ngIf="authForm.get('password').hasError(validation.type) && (authForm.get('password').dirty || authForm.get('password').touched)">
+                  {{ validation.message }}
+                </ion-text>
+              </ng-container>
+            </ion-item>
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" expand="full" [disabled]="authForm.invalid || loading" size="large">
+            <ng-container *ngIf="loading; else ok">
+              Por favor espere...<ion-spinner name="bubbles"></ion-spinner>
+            </ng-container>
+            <ng-template #ok>
+              Iniciar
+            </ng-template>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-title size="small" class="ion-text-center">Cambiar contraseña? 
+            <ion-text color="primary"  class="underline" (click)="cambiar()">
+              Aqu&iacute;
+            </ion-text>
+          </ion-title>
+        </ion-col>
+      </ion-row>
+
+    </form>
+  </ion-grid>
+
+  <ng-template #templateUsuario>
+    <ion-title>Bienvenido</ion-title>
+    <ion-title>{{ USER.cliente.nombres }}</ion-title>
+    <ion-title> <small>{{ USER.cliente.email }}</small> </ion-title>
+
+    <ion-grid fixed class="ion-padding">
+      <ion-list>
+        <!-- <ion-item lines="full">
+          <ion-icon slot="start" name="person"></ion-icon>
+          <ion-label>Editar Datos</ion-label>
+        </ion-item> -->
+        <ion-item lines="full" (click)="logout()">
+          <ion-icon slot="start" name="exit"></ion-icon>
+          <ion-label>Salir</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-grid>
+  </ng-template>
+
+</ion-content>
+
+<!-- <ion-footer class="ion-no-border" *ngIf="!USER">
+  <ion-toolbar class="ion-text-center">
+    <ion-title size="small">No tienes cuenta? <ion-router-link [routerLink]="'/tabs/signup'" href="#" class="underline">Crear
+      </ion-router-link>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer> -->

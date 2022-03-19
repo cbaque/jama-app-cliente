@@ -1,0 +1,156 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title class="ion-text-center">Checkout</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <ion-grid fixed *ngIf="USER; else nuevoUsuario">
+    <ion-row>
+      <ion-col size="12">
+        <ion-title>Datos Usuario</ion-title>
+      </ion-col>
+    </ion-row>
+
+    <ion-list *ngIf="USER">
+      <ion-item lines="full">
+        <ion-icon slot="start" name="person"></ion-icon>
+        <ion-label>{{ USER.cliente.nombres }}</ion-label>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-icon slot="start" name="mail"></ion-icon>
+        <ion-label>{{ USER.cliente.email }}</ion-label>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-icon slot="start" name="phone-portrait"></ion-icon>
+        <ion-label>{{ USER.cliente.celular }}</ion-label>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-icon slot="start"  name="navigate-circle"></ion-icon>
+        <ion-label>{{ USER.cliente.direccion }}</ion-label>
+      </ion-item>      
+    </ion-list>
+
+  </ion-grid>
+
+  <ng-template #nuevoUsuario>
+    <form [formGroup]="form">
+      <ion-list>
+
+        <ion-item lines="none">
+          <ion-row>
+            <ion-col size="12">
+              <ion-title>Registre sus datos</ion-title>
+            </ion-col>
+            <ion-col size="12" class="ion-padding-right">
+              <ion-text color="danger">
+                <small>* campos obligatorios</small>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+          
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-label  position="stacked">C&eacute;dula *</ion-label>
+          <ion-input placeholder="escriba aqui..." formControlName="cedula" type="tel" autofocus="true"></ion-input>
+          <ng-container *ngFor="let validation of validator.validationMessages.cedula">
+            <ion-text color="danger"
+              *ngIf="form.get('cedula').hasError(validation.type) && (form.get('cedula').dirty || form.get('cedula').touched)">
+              {{ validation.message }}
+            </ion-text>
+          </ng-container>          
+        </ion-item>      
+        
+        <ion-item lines="full">
+          <ion-label  position="stacked">Nombres *</ion-label>
+          <ion-input placeholder="escriba aqui..." formControlName="nombres" type="text"></ion-input>
+          <ng-container *ngFor="let validation of validator.validationMessages.nombres">
+            <ion-text color="danger"
+              *ngIf="form.get('nombres').hasError(validation.type) && (form.get('nombres').dirty || form.get('nombres').touched)">
+              {{ validation.message }}
+            </ion-text>
+          </ng-container>           
+        </ion-item>
+  
+        <ion-item lines="full">
+          <ion-label  position="stacked">Apellidos *</ion-label>
+          <ion-input placeholder="escriba aqui..." formControlName="apellidos" type="text"></ion-input>
+          <ng-container *ngFor="let validation of validator.validationMessages.apellidos">
+            <ion-text color="danger"
+              *ngIf="form.get('apellidos').hasError(validation.type) && (form.get('apellidos').dirty || form.get('apellidos').touched)">
+              {{ validation.message }}
+            </ion-text>
+          </ng-container>            
+        </ion-item>   
+        
+        <ion-item lines="full">
+          <ion-label  position="stacked">Tel&eacute;fono *</ion-label>
+          <ion-input placeholder="escriba aqui..." formControlName="telefono" type="tel"></ion-input>
+          <ng-container *ngFor="let validation of validator.validationMessages.telefono">
+            <ion-text color="danger"
+              *ngIf="form.get('telefono').hasError(validation.type) && (form.get('telefono').dirty || form.get('telefono').touched)">
+              {{ validation.message }}
+            </ion-text>
+          </ng-container>           
+        </ion-item>  
+        
+        <ion-item lines="full">
+          <ion-label  position="stacked">Correo *</ion-label>
+          <ion-input placeholder="escriba aqui..." formControlName="correo" type="email"></ion-input>
+          <ng-container *ngFor="let validation of validator.validationMessages.correo">
+            <ion-text color="danger"
+              *ngIf="form.get('correo').hasError(validation.type) && (form.get('correo').dirty || form.get('correo').touched)">
+              {{ validation.message }}
+            </ion-text>
+          </ng-container>            
+        </ion-item>     
+        
+        <ion-item lines="full">
+          <ion-label  position="stacked">Direcci&oacute;n *</ion-label>
+          <ion-input placeholder="escriba aqui..." formControlName="direccion" type="text"></ion-input>
+          <ng-container *ngFor="let validation of validator.validationMessages.direccion">
+            <ion-text color="danger"
+              *ngIf="form.get('direccion').hasError(validation.type) && (form.get('direccion').dirty || form.get('direccion').touched)">
+              {{ validation.message }}
+            </ion-text>
+          </ng-container>             
+        </ion-item> 
+        
+        <ion-item lines="full">
+          <ion-label  position="stacked">Contraseña *</ion-label>
+          <ion-input placeholder="escriba aqui..." formControlName="password" type="password"></ion-input>
+          <ng-container *ngFor="let validation of validator.validationMessages.password">
+            <ion-text color="danger"
+              *ngIf="form.get('password').hasError(validation.type) && (form.get('password').dirty || form.get('password').touched)">
+              {{ validation.message }}
+            </ion-text>
+          </ng-container>            
+        </ion-item> 
+  
+      </ion-list>
+    </form>
+  </ng-template>
+</ion-content>
+
+<ion-footer class="ion-no-border ion-padding" [translucent]="true">
+  <ion-toolbar>
+    <ion-button type="button" expand="full" fill="solid" size="large" (click)="pedir()" *ngIf="USER; else botonCrear">
+      <span class="ion-text-left ion-text-capitalize">Pedir</span><ion-text class="ion-text-end"><strong>${{ totales.total }}</strong></ion-text>
+    </ion-button>
+
+    <ng-template #botonCrear>
+      <ion-button type="button" expand="full" fill="solid" size="large" (click)="pedirConClienteNuevo()" [disabled]="form.invalid">
+        <span class="ion-text-left ion-text-capitalize">Pedir</span><ion-text class="ion-text-end"><strong>${{ totales.total }}</strong></ion-text>
+      </ion-button>      
+    </ng-template>
+    
+  </ion-toolbar>
+</ion-footer>

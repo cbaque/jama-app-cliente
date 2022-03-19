@@ -1,0 +1,23 @@
+<ion-content [fullscreen]="true">
+
+  <ion-slides pager="false" class="ion-padding">
+    <ion-slide>
+      <div class="slide">
+        <img src="assets/images/shopping-bag.png">
+        <h6>Pedido ordenado correctamente.</h6> 
+      </div>
+
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>
+
+<ion-footer class="ion-no-border ion-padding" [translucent]="true">
+  <ion-toolbar>
+    <ion-button (click)="closeModal()" expand="full" fill="solid" type="button">
+      <div class="ion-text-capitalize">
+        Aceptar
+      </div>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,92 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title class="ion-text-center">Tu carrito</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="deleteAllOrders()" [disabled]="!ORDERS.length">
+        <div class="ion-text-capitalize">
+          Vaciar
+        </div>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ng-container *ngIf="ORDERS.length; else noOrders">
+    <ion-list lines="none">
+
+      <ion-item *ngFor="let item of ORDERS">
+        <ion-label>x {{ item.cantidad }} {{ item.producto }}</ion-label>
+        <ion-text slot="end">${{ item.subtotal }}</ion-text>
+        <ion-icon name="close-circle" slot="end" color="danger" (click)="deleteOrder( item.id )"></ion-icon>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-item-divider></ion-item-divider>
+
+    <ion-list lines="none">
+      <ion-item>
+        <ion-label>Subtotal</ion-label>
+        <ion-text>$ {{ totales.subtotal }}</ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>IVA</ion-label>
+        <ion-text>$ {{ totales.iva }}</ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Total</ion-label>
+        <ion-text>$ {{ totales.total }}</ion-text>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+
+  <ng-template #noOrders>
+
+    <ion-slides pager="false" class="ion-padding">
+      <ion-slide>
+        <div class="slide">
+          <img src="assets/images/logo.svg">
+          <h6>Tu carrito est&aacute; vac&iacute;o</h6> 
+          <div class="ion-text-justify">
+            <small>Revisa nuestro men&uacute; y añade algunos platos para continuar.</small>
+          </div>
+        </div>
+
+      </ion-slide>
+    </ion-slides>
+
+  </ng-template>
+
+</ion-content>
+
+<ion-footer class="ion-no-border ion-padding" [translucent]="true">
+  <ion-toolbar>
+    <ion-row *ngIf="ORDERS.length; else footerNoOrders">
+      <ion-col size="12">
+        <ion-button type="button" expand="full" fill="solid" size="large" (click)="checkout()">
+          <span class="ion-text-left ion-text-capitalize">Continuar</span><ion-text class="ion-text-end"><strong>${{ totales.total }}</strong></ion-text>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    
+    <ng-template #footerNoOrders>
+      <ion-button (click)="closeModal()" expand="full" fill="solid" type="button">
+        <div class="ion-text-capitalize">
+          Volver al Men&uacute;
+        </div>
+      </ion-button>
+    </ng-template>
+  </ion-toolbar>
+</ion-footer>
