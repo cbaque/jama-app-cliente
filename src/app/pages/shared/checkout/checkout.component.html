@@ -1,5 +1,5 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="dark">
     <ion-buttons slot="start">
       <ion-button (click)="closeModal()">
         <ion-icon name="chevron-back"></ion-icon>
@@ -11,8 +11,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen="true">
-  <ion-grid fixed *ngIf="USER; else nuevoUsuario">
+<ion-content fullscreen="true" color="dark">
+  <ion-grid fixed *ngIf="USER; else nuevoUsuario" color="dark">
+
     <ion-row>
       <ion-col size="12">
         <ion-title>Datos Usuario</ion-title>
@@ -41,10 +42,26 @@
   </ion-grid>
 
   <ng-template #nuevoUsuario>
-    <form [formGroup]="form">
-      <ion-list>
 
-        <ion-item lines="none">
+    <ion-row class="ion-padding-start">
+      <ion-col size="6">
+        <ion-text color="primary" class="ion-text-start">
+          <ion-text color="light">
+            <small>¿Tienes una cuenta?</small>
+          </ion-text>
+        </ion-text>
+      </ion-col>
+      <ion-col size="6" class="ion-text-end">
+        <ion-button (click)="onClick()" expand="block" color="light">
+          Iniciar sesi&oacute;n
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    
+    <form [formGroup]="form">
+      <!-- <ion-list> -->
+
+        <ion-item lines="none" class="ion-margin-bottom" color="dark">
           <ion-row>
             <ion-col size="12">
               <ion-title>Registre sus datos</ion-title>
@@ -58,7 +75,7 @@
           
         </ion-item>
 
-        <ion-item lines="full">
+        <ion-item lines="full" color="medium" class="ion-margin-bottom ion-margin-start ion-margin-end">
           <ion-label  position="stacked">C&eacute;dula *</ion-label>
           <ion-input placeholder="escriba aqui..." formControlName="cedula" type="tel" autofocus="true"></ion-input>
           <ng-container *ngFor="let validation of validator.validationMessages.cedula">
@@ -69,7 +86,7 @@
           </ng-container>          
         </ion-item>      
         
-        <ion-item lines="full">
+        <ion-item lines="full" class="ion-margin-bottom ion-margin-start ion-margin-end" color="medium">
           <ion-label  position="stacked">Nombres *</ion-label>
           <ion-input placeholder="escriba aqui..." formControlName="nombres" type="text"></ion-input>
           <ng-container *ngFor="let validation of validator.validationMessages.nombres">
@@ -80,7 +97,7 @@
           </ng-container>           
         </ion-item>
   
-        <ion-item lines="full">
+        <ion-item lines="full" class="ion-margin-bottom ion-margin-start ion-margin-end" color="medium">
           <ion-label  position="stacked">Apellidos *</ion-label>
           <ion-input placeholder="escriba aqui..." formControlName="apellidos" type="text"></ion-input>
           <ng-container *ngFor="let validation of validator.validationMessages.apellidos">
@@ -91,7 +108,7 @@
           </ng-container>            
         </ion-item>   
         
-        <ion-item lines="full">
+        <ion-item lines="full" class="ion-margin-bottom ion-margin-start ion-margin-end" color="medium">
           <ion-label  position="stacked">Tel&eacute;fono *</ion-label>
           <ion-input placeholder="escriba aqui..." formControlName="telefono" type="tel"></ion-input>
           <ng-container *ngFor="let validation of validator.validationMessages.telefono">
@@ -102,7 +119,7 @@
           </ng-container>           
         </ion-item>  
         
-        <ion-item lines="full">
+        <ion-item lines="full" class="ion-margin-bottom ion-margin-start ion-margin-end" color="medium">
           <ion-label  position="stacked">Correo *</ion-label>
           <ion-input placeholder="escriba aqui..." formControlName="correo" type="email"></ion-input>
           <ng-container *ngFor="let validation of validator.validationMessages.correo">
@@ -113,7 +130,7 @@
           </ng-container>            
         </ion-item>     
         
-        <ion-item lines="full">
+        <ion-item lines="full" class="ion-margin-bottom ion-margin-start ion-margin-end" color="medium">
           <ion-label  position="stacked">Direcci&oacute;n *</ion-label>
           <ion-input placeholder="escriba aqui..." formControlName="direccion" type="text"></ion-input>
           <ng-container *ngFor="let validation of validator.validationMessages.direccion">
@@ -124,7 +141,7 @@
           </ng-container>             
         </ion-item> 
         
-        <ion-item lines="full">
+        <ion-item lines="full" class="ion-margin-bottom ion-margin-start ion-margin-end" color="medium">
           <ion-label  position="stacked">Contraseña *</ion-label>
           <ion-input placeholder="escriba aqui..." formControlName="password" type="password"></ion-input>
           <ng-container *ngFor="let validation of validator.validationMessages.password">
@@ -135,13 +152,13 @@
           </ng-container>            
         </ion-item> 
   
-      </ion-list>
+      <!-- </ion-list> -->
     </form>
   </ng-template>
 </ion-content>
 
 <ion-footer class="ion-no-border ion-padding" [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="dark">
     <ion-button type="button" expand="full" fill="solid" size="large" (click)="pedir()" *ngIf="USER; else botonCrear">
       <span class="ion-text-left ion-text-capitalize">Pedir</span><ion-text class="ion-text-end"><strong>${{ totales.total }}</strong></ion-text>
     </ion-button>

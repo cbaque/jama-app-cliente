@@ -1,5 +1,5 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="dark">
     <ion-buttons slot="start">
       <ion-button (click)="closeModal()">
         <ion-icon name="chevron-back"></ion-icon>
@@ -19,7 +19,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" color="dark">
 
   <ng-container *ngIf="ORDERS.length; else noOrders">
     <ion-list lines="none">
@@ -72,7 +72,7 @@
 </ion-content>
 
 <ion-footer class="ion-no-border ion-padding" [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="dark">
     <ion-row *ngIf="ORDERS.length; else footerNoOrders">
       <ion-col size="12">
         <ion-button type="button" expand="full" fill="solid" size="large" (click)="checkout()">

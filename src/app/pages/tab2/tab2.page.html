@@ -1,8 +1,8 @@
 <app-header></app-header>
-<ion-toolbar>
+<ion-toolbar color="dark">
     <ion-searchbar mode="ios" placeholder="Buscar Promociones" debounce="500" (ionChange)="getProductos($event)"></ion-searchbar>
 </ion-toolbar>
-<ion-content [fullscreen]="true" scrollY="true">
+<ion-content [fullscreen]="true" scrollY="true" color="dark">
     <ion-refresher class="ion-no-padding" slot="fixed" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>

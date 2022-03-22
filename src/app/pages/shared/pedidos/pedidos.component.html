@@ -1,5 +1,5 @@
 <ion-header [translucent]="true" class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar color="dark">
     <ion-buttons slot="start">
       <ion-button (click)="closeModal()">
         <ion-icon name="chevron-back"></ion-icon>
@@ -8,9 +8,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" color="dark">
 
-  <ion-card class="ion-padding">
+  <ion-card class="ion-padding" color="dark">
     <div class="ion-text-start">
       <img [src]="'data:image/jpg;base64,' + PRODUCTOS.imagen.imagen_prod">
     </div>
@@ -23,7 +23,7 @@
 </ion-content>
 
 <ion-footer class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar color="dark">
     <ion-row>
       <ion-col size="6">
 
