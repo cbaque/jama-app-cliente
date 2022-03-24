@@ -8,6 +8,8 @@ import { MessageService } from 'src/app/core/services/message.service';
 import { ConectionService } from 'src/app/core/services/offline/conection/conection.service';
 import { PedidosService } from 'src/app/core/services/pedidos/pedidos.service';
 import { ValidacionRegistrosService } from 'src/app/helpers/validacion-registros.service';
+import { MensajeConfirmacionComponent } from '../mensaje-confirmacion/mensaje-confirmacion.component';
+import { CheckoutLoginComponent } from './checkout-login/checkout-login.component';
 
 @Component({
   selector: 'app-checkout',
@@ -21,6 +23,8 @@ export class CheckoutComponent implements OnInit {
   readonly dbTableOrdes: string = "orders";
   public totales = { subtotal: 0, iva: 0, total: 0 };
   form: FormGroup;
+  modalLogin: HTMLIonModalElement;
+  modalConfirm: HTMLIonModalElement;
 
   constructor(
     public viewCtrl: ModalController,
@@ -163,6 +167,38 @@ export class CheckoutComponent implements OnInit {
       } 
     )
 
+  }
+
+  async pedirConLogin() {
+    this.modalLogin = await this.viewCtrl.create({
+      component: CheckoutLoginComponent     
+    });
+
+    this.modalLogin.onWillDismiss().then(
+      ( res: any ) => { 
+        if ( res.data.dismiss ){
+          this.modalConfirmacion();
+          this.getOrders();
+        }
+      }
+    );
+
+    return await this.modalLogin.present();
+  }
+
+
+  async modalConfirmacion() {
+    this.modalConfirm = await this.viewCtrl.create({
+      component: MensajeConfirmacionComponent     
+    });
+
+    this.modalConfirm.onWillDismiss().then(
+      () => { 
+        this.closeModal();
+      }
+    );
+
+    return await this.modalConfirm.present();
   }
 
 }

@@ -17,4 +17,8 @@ export class PedidosService {
   public postCliente( data: any ) {
     return this.DataServ.postQuery<any>(`cliente/pedido`, data);
   }
+
+  public postLogin( data: any ) {
+    return this.DataServ.postQuery<any>(`login/pedido`, data);
+  }  
 }

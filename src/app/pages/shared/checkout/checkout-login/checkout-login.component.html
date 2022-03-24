@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar color="dark">
     <ion-buttons slot="start">
       <ion-button (click)="closeModal()">
@@ -9,32 +9,30 @@
 </ion-header>
 
 <ion-toolbar class="ion-text-center ion-padding" color="dark">
-  <ion-title class="ion-text-wrap spacing">Cambiar contraseña</ion-title>
+  <ion-title class="ion-text-wrap spacing">Iniciar Sesi&oacute;n</ion-title>
 </ion-toolbar>
 
 
 <ion-content [fullscreen]="true" color="dark">
 
-  <form [formGroup]="form" (ngSubmit)="changepassword()">
+  <form [formGroup]="form">
     <ion-row>
-      <ion-col>
-
-        <!-- <ion-list> -->
+      <ion-col col="12">
 
           <ion-item lines="full" class="ion-margin-bottom ion-margin-start ion-margin-end" color="medium">
             <ion-label position="floating">C&eacute;dula</ion-label>
-            <ion-input name="cedula" formControlName="cedula" type="tel" required></ion-input>
+            <ion-input name="email" formControlName="email" type="tel" required></ion-input>
             <ion-icon name="person" slot="start"></ion-icon>
-            <ng-container *ngFor="let validation of validator.validationMessages.cedula">
+            <ng-container *ngFor="let validation of validator.validationMessages.email">
               <ion-text color="danger"
-                *ngIf="form.get('cedula').hasError(validation.type) && (form.get('cedula').dirty || form.get('cedula').touched)">
+                *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)">
                 {{ validation.message }}
               </ion-text>
             </ng-container>
           </ion-item>
 
           <ion-item lines="full" color="medium" class="ion-margin-start ion-margin-end">
-            <ion-label position="floating">Nueva contraseña</ion-label>
+            <ion-label position="floating">Contraseña</ion-label>
             <ion-input name="password" formControlName="password" type="password" required></ion-input>
             <ion-icon name="bag" slot="start"></ion-icon>
             <ng-container *ngFor="let validation of validator.validationMessages.password">
@@ -45,24 +43,21 @@
             </ng-container>
           </ion-item>
 
-        <!-- </ion-list> -->
-
       </ion-col>
     </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <ion-button type="submit" expand="full" [disabled]="form.invalid || loading" size="large">
-          <ng-container *ngIf="loading; else ok">
-            Por favor espere...<ion-spinner name="bubbles"></ion-spinner>
-          </ng-container>
-          <ng-template #ok>
-            Cambiar
-          </ng-template>
-        </ion-button>
-      </ion-col>
-    </ion-row>
 
   </form>
 
 </ion-content>
+
+
+<ion-footer class="ion-no-border ion-padding" [translucent]="true">
+  <ion-toolbar color="dark">
+
+    <ion-button type="button" expand="full" fill="solid" size="large" (click)="pedirConLogin()" [disabled]="form.invalid">
+      <span class="ion-text-left ion-text-capitalize">Pedir</span><ion-text class="ion-text-end"><strong>${{ totales.total }}</strong></ion-text>
+    </ion-button>  
+
+  </ion-toolbar>
+</ion-footer>

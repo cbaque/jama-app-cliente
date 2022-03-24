@@ -7,9 +7,10 @@ import { PedidosComponent } from './pedidos/pedidos.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MensajeConfirmacionComponent } from './mensaje-confirmacion/mensaje-confirmacion.component';
+import { CheckoutLoginComponent } from './checkout/checkout-login/checkout-login.component';
 
 @NgModule({
-  declarations: [ HeaderComponent, PedidosComponent, CarritoComponent, CheckoutComponent, MensajeConfirmacionComponent ],
+  declarations: [ HeaderComponent, PedidosComponent, CarritoComponent, CheckoutComponent, MensajeConfirmacionComponent, CheckoutLoginComponent ],
   imports: [
     IonicModule,
     CommonModule,

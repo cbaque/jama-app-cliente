@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" color="dark">
 
   <ion-slides pager="false" class="ion-padding">
     <ion-slide>
@@ -13,8 +13,8 @@
 </ion-content>
 
 <ion-footer class="ion-no-border ion-padding" [translucent]="true">
-  <ion-toolbar>
-    <ion-button (click)="closeModal()" expand="full" fill="solid" type="button">
+  <ion-toolbar color="dark">
+    <ion-button (click)="closeModal()" [attr.href]="'/tabs/tab1'" expand="full" fill="solid" type="button">
       <div class="ion-text-capitalize">
         Aceptar
       </div>
