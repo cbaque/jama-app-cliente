@@ -10,7 +10,13 @@ import { ConectionService } from './core/services/offline/conection/conection.se
 export class AppComponent {
   constructor(
     private conOffline : ConectionService,
+    private platform: Platform,   
   ) {
-    this.conOffline.databaseConn();
+    this.platform.ready().then(() => {
+      document.body.setAttribute('data-theme', 'dark');
+      document.body.classList.toggle('dark', true);      
+      this.conOffline.databaseConn();
+    });
+
   }
 }

@@ -18,7 +18,11 @@ const routes: Routes = [
       {
         path: 'tab3',
         loadChildren: () => import('../auth/auth.module').then(m => m.AuthPageModule)
-      },          
+      }, 
+      {
+        path: 'tab4',
+        loadChildren: () => import('../restaurantes/restaurantes.module').then(m => m.RestaurantesModule)
+      },                  
       {
         path: '',
         redirectTo: '/tabs/tab1',

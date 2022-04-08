@@ -27,9 +27,7 @@ export class HeaderComponent implements OnInit {
     private platform: Platform,
   ) { 
     this.platform.ready().then(() => {
-      console.log('inicia')
       this.getNumOrders();
-      console.log('finaliza')
     })
   }
   

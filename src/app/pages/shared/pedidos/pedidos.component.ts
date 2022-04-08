@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { SQLiteObject } from '@awesome-cordova-plugins/sqlite';
 import { ModalController } from '@ionic/angular';
 import { MessageService } from 'src/app/core/services/message.service';
+import { ConectionService } from 'src/app/core/services/offline/conection/conection.service';
 import { PedidosOfflineService } from 'src/app/core/services/offline/pedidos-offline/pedidos-offline.service';
 
 @Component({
@@ -14,11 +16,15 @@ export class PedidosComponent implements OnInit {
   PRODUCTOS: any;
   cantidad: number = 1;
   precio: any;
+  TOTAL_ORDERS : number = 0;
+  TOTAL_ORDERS_RUC : number = 0;
+  readonly dbTableOrdes: string = "orders";
   
   constructor(
     public viewCtrl: ModalController,
     private pedidoOff: PedidosOfflineService,
     private smsSrv: MessageService,
+    private conOffline: ConectionService,
   ) { 
   }
 
@@ -53,11 +59,13 @@ export class PedidosComponent implements OnInit {
     let form = {  
       id_producto : this.PRODUCTOS.id_prod,
       producto : this.PRODUCTOS.titulo_prod,
+      ruc_empresa : this.PRODUCTOS.ruc_empresa,
       cantidad : this.cantidad,
       costo : this.PRODUCTOS.costo,
       iva : this.PRODUCTOS.iva,
       subtotal : ( this.PRODUCTOS.costo * this.cantidad ),
-      iva_valor : ( this.PRODUCTOS.iva === 's') ? ( ( this.PRODUCTOS.costo * this.cantidad ) * 12 ) / 100 : 0,
+      iva_valor : ( this.PRODUCTOS.iva === 's') ? ( ( this.PRODUCTOS.costo * this.cantidad ) * this.PRODUCTOS.detalle_iva.valor ) / 100 : 0,
+      iva_costo:  ( this.PRODUCTOS.iva === 's') ? this.PRODUCTOS.detalle_iva.valor : 0,
       total: 0
     };
 
@@ -78,5 +86,46 @@ export class PedidosComponent implements OnInit {
       }
     })
   }
+
+
+  getOrdersTotal() {
+
+    return new Promise( ( resolve, reject ) => {
+      
+      this.conOffline.open()
+      .then((db: SQLiteObject) => {
+        db.executeSql(` SELECT COUNT(1) AS total FROM ${ this.dbTableOrdes }`, [])
+        .then( res => {
+          let conteo = res.rows.item(0);
+          resolve ( Number( conteo.total ) );
+        },
+        ( error ) => {
+          resolve( null )
+        }
+        );
+      });
+
+    })
+  }
+
+  getOrdersRUC( ruc_empresa: string ) {
+
+    return new Promise( ( resolve, reject ) => {
+      
+      this.conOffline.open()
+      .then((db: SQLiteObject) => {
+        db.executeSql(` SELECT COUNT(1) AS total FROM ${ this.dbTableOrdes } WHERE ruc_empresa = ?`, [ ruc_empresa ])
+        .then( res => {
+          let conteo = res.rows.item(0);
+          resolve ( Number( conteo.total ) );
+        },
+        ( error ) => {
+          resolve( null )
+        }
+        );
+      });
+
+    })   
+  }  
 
 }

@@ -28,11 +28,13 @@ export class ConectionService {
           id INTEGER PRIMARY KEY, 
           id_producto   INTEGER,
           producto      VARCHAR(255),
+          ruc_empresa   VARCHAR(13),
           cantidad      INTEGER,
           costo         NUMERIC,
           iva           VARCHAR(1),
           subtotal      NUMERIC,
           iva_valor     NUMERIC,
+          iva_costo     NUMERIC,
           total         NUMERIC
         )`, [])
         .then(() => console.log('TABLA ORDERS CREADA CORRECTAMENTE'))

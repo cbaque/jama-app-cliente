@@ -69,8 +69,6 @@ export class CheckoutLoginComponent implements OnInit {
       this.totales.iva = this.totales.iva + e.iva_valor;
       this.totales.total = this.totales.total + e.total;
     });
-
-    console.log( this.totales )
   }
 
   private createForm(){

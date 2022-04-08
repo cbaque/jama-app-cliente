@@ -1,0 +1,21 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true" scrollY="true" color="dark">
+
+    <ion-list lines="full">
+
+        <ion-item *ngFor="let item of RESTAURANTES" color="dark">
+            <ion-avatar slot="start">
+                <img [src]="'data:image/jpg;base64,' + item.imagen.logo">
+            </ion-avatar>
+
+            <ion-label>
+                <p><ion-icon slot="start" name="fast-food" color="light"></ion-icon> {{ item.razon_social }}</p>
+                <p><ion-icon slot="start" name="navigate" color="light"></ion-icon> {{ item.direccion }}</p>
+                <p><ion-icon slot="start" name="call" color="light"></ion-icon> {{ item.tlf ? item.tlf : '' }}</p>
+            </ion-label>
+        </ion-item>
+
+    </ion-list>
+
+</ion-content>

@@ -25,7 +25,7 @@
     <ion-list lines="none">
 
       <ion-item *ngFor="let item of ORDERS">
-        <ion-label>x {{ item.cantidad }} {{ item.producto }}</ion-label>
+        <ion-label>x {{ item.cantidad }} {{ item.producto }} <small>(IVA {{ item.iva_costo }}%)</small></ion-label>
         <ion-text slot="end">${{ item.subtotal }}</ion-text>
         <ion-icon name="close-circle" slot="end" color="danger" (click)="deleteOrder( item.id )"></ion-icon>
       </ion-item>
@@ -57,7 +57,7 @@
     <ion-slides pager="false" class="ion-padding">
       <ion-slide>
         <div class="slide">
-          <img src="assets/images/logo.svg">
+          <img src="assets/images/logo.png">
           <h6>Tu carrito est&aacute; vac&iacute;o</h6> 
           <div class="ion-text-justify">
             <small>Revisa nuestro men&uacute; y añade algunos platos para continuar.</small>
@@ -82,7 +82,7 @@
     </ion-row>
     
     <ng-template #footerNoOrders>
-      <ion-button (click)="closeModal()" expand="full" fill="solid" type="button">
+      <ion-button (click)="closeModal()" expand="full" fill="solid" type="button" size="large">
         <div class="ion-text-capitalize">
           Volver al Men&uacute;
         </div>

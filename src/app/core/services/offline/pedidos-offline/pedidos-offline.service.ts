@@ -22,22 +22,26 @@ export class PedidosOfflineService {
           `INSERT INTO ${ this.dbTableOrders } ( 
             id_producto, 
             producto, 
+            ruc_empresa,
             cantidad,
             costo,
             iva,
             subtotal,
             iva_valor,
+            iva_costo,
             total
             ) 
             VALUES 
             ( 
               '${ data.id_producto }', 
               '${ data.producto }', 
+              '${ data.ruc_empresa }', 
               '${ data.cantidad }',
               '${ data.costo }',
               '${ data.iva }',
               '${ data.subtotal }',
               '${ data.iva_valor }',
+              '${ data.iva_costo }',
               '${ data.total }'
             )`
           ,[]
