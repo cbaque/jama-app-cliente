@@ -56,7 +56,7 @@
   <ion-toolbar color="dark">
 
     <ion-button type="button" expand="full" fill="solid" size="large" (click)="pedirConLogin()" [disabled]="form.invalid">
-      <span class="ion-text-left ion-text-capitalize">Pedir</span><ion-text class="ion-text-end"><strong>${{ totales.total }}</strong></ion-text>
+      <span class="ion-text-left ion-text-capitalize">Pedir</span><ion-text class="ion-text-end"><strong>${{ roundDecimal(totales.total) }}</strong></ion-text>
     </ion-button>  
 
   </ion-toolbar>

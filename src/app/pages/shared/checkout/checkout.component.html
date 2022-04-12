@@ -160,12 +160,12 @@
 <ion-footer class="ion-no-border ion-padding" [translucent]="true">
   <ion-toolbar color="dark">
     <ion-button type="button" expand="full" fill="solid" size="large" (click)="pedir()" *ngIf="USER; else botonCrear">
-      <span class="ion-text-left ion-text-capitalize">Pedir</span><ion-text class="ion-text-end"><strong>${{ totales.total }}</strong></ion-text>
+      <span class="ion-text-left ion-text-capitalize">Pedir</span><ion-text class="ion-text-end"><strong>${{ roundDecimal(totales.total) }}</strong></ion-text>
     </ion-button>
 
     <ng-template #botonCrear>
       <ion-button type="button" expand="full" fill="solid" size="large" (click)="pedirConClienteNuevo()" [disabled]="form.invalid">
-        <span class="ion-text-left ion-text-capitalize">Pedir</span><ion-text class="ion-text-end"><strong>${{ totales.total }}</strong></ion-text>
+        <span class="ion-text-left ion-text-capitalize">Pedir</span><ion-text class="ion-text-end"><strong>${{ roundDecimal(totales.total) }}</strong></ion-text>
       </ion-button>      
     </ng-template>
     

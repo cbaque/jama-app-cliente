@@ -37,17 +37,17 @@
     <ion-list lines="none">
       <ion-item>
         <ion-label>Subtotal</ion-label>
-        <ion-text>$ {{ totales.subtotal }}</ion-text>
+        <ion-text>$ {{ roundDecimal(totales.subtotal) }}</ion-text>
       </ion-item>
 
       <ion-item>
         <ion-label>IVA</ion-label>
-        <ion-text>$ {{ totales.iva }}</ion-text>
+        <ion-text>$ {{ roundDecimal(totales.iva) }}</ion-text>
       </ion-item>
 
       <ion-item>
         <ion-label>Total</ion-label>
-        <ion-text>$ {{ totales.total }}</ion-text>
+        <ion-text>$ {{ roundDecimal(totales.total) }}</ion-text>
       </ion-item>
     </ion-list>
   </ng-container>
@@ -76,7 +76,7 @@
     <ion-row *ngIf="ORDERS.length; else footerNoOrders">
       <ion-col size="12">
         <ion-button type="button" expand="full" fill="solid" size="large" (click)="checkout()">
-          <span class="ion-text-left ion-text-capitalize">Continuar</span><ion-text class="ion-text-end"><strong>${{ totales.total }}</strong></ion-text>
+          <span class="ion-text-left ion-text-capitalize">Continuar</span><ion-text class="ion-text-end"><strong>${{ roundDecimal(totales.total) }}</strong></ion-text>
         </ion-button>
       </ion-col>
     </ion-row>

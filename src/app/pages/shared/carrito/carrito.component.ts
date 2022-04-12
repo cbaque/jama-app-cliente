@@ -139,4 +139,8 @@ export class CarritoComponent implements OnInit {
     return await this.modalConfirm.present();
   }
 
+  roundDecimal( valor: any ) {
+    return parseFloat( valor ).toFixed(2);
+  }
+
 }

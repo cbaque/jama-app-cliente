@@ -111,4 +111,8 @@ export class CheckoutLoginComponent implements OnInit {
     )
   }
 
+  roundDecimal( valor: any ) {
+    return parseFloat( valor ).toFixed(2);
+  }
+
 }

@@ -201,4 +201,8 @@ export class CheckoutComponent implements OnInit {
     return await this.modalConfirm.present();
   }
 
+  roundDecimal( valor: any ) {
+    return parseFloat( valor ).toFixed(2);
+  }
+
 }
